@@ -292,7 +292,7 @@ public class DistroTestPlugin implements Plugin<Project> {
         vagrant.vmEnv("SYSTEM_JAVA_HOME", convertPath(project, vagrant, systemJdkProvider, "", ""));
         // set java home for gradle to use. package tests will overwrite/remove this for each test case
         vagrant.vmEnv("JAVA_HOME", convertPath(project, vagrant, gradleJdkProvider, "", ""));
-        if (System.getenv("JENKINS_URL") != null) {
+        if (System.getenv("JENKINS_URL") != null && System.getenv("JENKINS_URL") != "") {
             Stream.of("JOB_NAME", "JENKINS_URL", "BUILD_NUMBER", "BUILD_URL").forEach(name -> vagrant.vmEnv(name, System.getenv(name)));
         }
         vagrant.setIsWindowsVM(isWindows(project));
